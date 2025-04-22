@@ -1,15 +1,18 @@
+import 'package:dine_dealer/core/failures/failure.dart';
+import 'package:dine_dealer/features/data/repositories/log_in_repository.dart';
 import 'package:dine_dealer/features/pages/log_in/log_in_page.dart';
+import 'package:dine_dealer/features/pages/onboarding/onboarding.dart';
 import 'package:flutter/material.dart';
+import 'features/pages/enter_code_page/enter_code_page.dart';
 
 
 void main() {
+  // LogInRepository().logIn('+995558544672');
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
