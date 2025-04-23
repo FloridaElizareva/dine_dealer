@@ -1,3 +1,6 @@
+import 'package:dine_dealer/core/assets/assets.gen.dart';
+import 'package:dine_dealer/core/assets/fonts.gen.dart';
+import 'package:dine_dealer/core/theme/colors.dart';
 import 'package:dine_dealer/features/pages/log_in/widgets/phone_number_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,6 +11,7 @@ class LogInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: DDColors.bg,
       appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -23,10 +27,10 @@ class LogInPage extends StatelessWidget {
                     fontSize: 24,
                     color: Color(0xFFE7632F),
                     fontWeight: FontWeight.w700,
+                    fontFamily: FontFamily.robotoSerif,
                   ),
                 ),
-                SvgPicture.asset(
-                  'assets/images/logoButton.svg',
+                Assets.images.logoButton.svg(
                   width: 30,
                   height: 30,
                 ),

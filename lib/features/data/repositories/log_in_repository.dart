@@ -6,18 +6,21 @@ import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
 
 class LogInRepository {
-  Future<Either<Failure, String>> logIn(String phone) async {
+  Future<Either<Failure, String>> logIn(String phone, {String? code}) async {
+    final Map<String, String> data = {
+      'phone': phone,
+    };
+
+    if (code != null) {
+      data['code'] = code;
+    }
+
     try {
-      final response = await Dio().post(Urls.login, data: {'phone': phone});
+      final response = await Dio().post(Urls.login, data: data);
 
-      if (response.statusCode == 200) {
-        return Right(response.data['message']);
-      }
-
-      final failure = Failure(response.statusCode, response.data['error']);
-      return Left(failure);
-    } catch (e) {
-      return Left(Failure(500, "Internal Server Error"));
+      return Right(response.data['message']);
+    } on DioException catch (e) {
+      return Left(Failure(e.response?.statusCode, e.response!.data['error']));
     }
   }
 }

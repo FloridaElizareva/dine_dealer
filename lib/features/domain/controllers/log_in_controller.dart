@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dine_dealer/core/constants/country_codes.dart';
 import 'package:dine_dealer/core/failures/failure.dart';
 import 'package:dine_dealer/features/data/repositories/log_in_repository.dart';
@@ -10,9 +12,15 @@ class LogInController extends GetxController {
 
   String phone = '';
 
-  Failure? failure;
+  Failure? logInFailure;
+
+  Failure? enterCodeFailure;
 
   bool isLoading = false;
+
+  int resendTime = 20;
+
+  Timer? timer;
 
   void selectCountry(Country country) {
     selectedCountry = country;
@@ -21,20 +29,19 @@ class LogInController extends GetxController {
 
   void enterNumber(String newNumber) {
     phone = newNumber;
-    failure = null;
+    logInFailure = null;
     update();
-
   }
 
-  void logIn() async {
+  Future<void> logIn() async {
     isLoading = true;
     update();
-    
+
     final fullPhone = selectedCountry.code + phone;
     final lor = await LogInRepository().logIn(fullPhone);
 
     if (lor.isLeft) {
-      failure = lor.left;
+      logInFailure = lor.left;
     }
 
     isLoading = false;
@@ -42,5 +49,38 @@ class LogInController extends GetxController {
     update();
   }
 
+  Future<void> sendOtp(String code) async {
+    isLoading = true;
+
+    update();
+
+    final fullPhone = selectedCountry.code + phone;
+    final lor = await LogInRepository().logIn(fullPhone, code: code);
+
+    if (lor.isLeft) {
+      enterCodeFailure = lor.left;
+    }
+
+    isLoading = false;
+
+    update();
+  }
+
+  void startTimer(){
+    resendTime = 20;
+
+    timer = Timer.periodic(Duration(seconds: 1), (timer){
+      if(resendTime == 0){
+        timer.cancel();
+      } 
+      resendTime --;
+      update();
+    });
+  }
+
+  void resetTimer(){
+    resendTime = 20;
+    timer?.cancel();
+  }
 
 }

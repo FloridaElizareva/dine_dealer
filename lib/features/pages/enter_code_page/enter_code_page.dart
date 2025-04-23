@@ -1,5 +1,8 @@
+import 'package:dine_dealer/core/theme/colors.dart';
+import 'package:dine_dealer/features/domain/controllers/log_in_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 class EnterCodePage extends StatefulWidget {
   const EnterCodePage({super.key});
@@ -22,69 +25,97 @@ class _EnterCodePageState extends State<EnterCodePage> {
   final textEditingController4 = TextEditingController();
 
   @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<LogInController>().startTimer();
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    Get.find<LogInController>().resetTimer();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xFFFCFAF1),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              IconButton(
-                icon: Icon(Icons.arrow_back, size: 28),
-                onPressed: () {},
-              ),
-              SizedBox(height: 20),
-              Text(
-                'Enter the code',
-                style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 8),
-              Text(
-                'Enter the 4-digit code sent to you at +46 40 123 4567',
-                style: TextStyle(fontSize: 16),
-              ),
-              SizedBox(height: 32),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return GetBuilder<LogInController>(
+      builder: (controller) {
+        return Scaffold(
+          backgroundColor: DDColors.bg,
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildCodeBox(
-                    focusNode1,
-                    textEditingController1,
-                    nextFocusNode: focusNode2,
+                  IconButton(
+                    icon: Icon(Icons.arrow_back, size: 28),
+                    onPressed: Get.back,
                   ),
-                  _buildCodeBox(
-                    focusNode2,
-                    textEditingController2,
-                    nextFocusNode: focusNode3,
-                    prevFocusNode: focusNode1,
+                  SizedBox(height: 20),
+                  Text(
+                    'Enter the code',
+                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                   ),
-                  _buildCodeBox(
-                    focusNode3,
-                    textEditingController3,
-                    nextFocusNode: focusNode4,
-                    prevFocusNode: focusNode2,
+                  SizedBox(height: 8),
+                  Text(
+                    'Enter the 4-digit code sent to you at ${controller.selectedCountry.code}${controller.phone}',
+                    style: TextStyle(fontSize: 16),
                   ),
-                  _buildCodeBox(
-                    focusNode4,
-                    textEditingController4,
-                    prevFocusNode: focusNode3,
+                  SizedBox(height: 32),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      _buildCodeBox(
+                        focusNode1,
+                        textEditingController1,
+                        nextFocusNode: focusNode2,
+                      ),
+                      _buildCodeBox(
+                        focusNode2,
+                        textEditingController2,
+                        nextFocusNode: focusNode3,
+                        prevFocusNode: focusNode1,
+                      ),
+                      _buildCodeBox(
+                        focusNode3,
+                        textEditingController3,
+                        nextFocusNode: focusNode4,
+                        prevFocusNode: focusNode2,
+                      ),
+                      _buildCodeBox(
+                        focusNode4,
+                        textEditingController4,
+                        prevFocusNode: focusNode3,
+                        onChange: () => sendOtp(),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    controller.enterCodeFailure != null ? controller.enterCodeFailure!.message : "",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                  SizedBox(height: 24),
+                  Text(
+                    controller.resendTime > 0
+                        ? "Resend code in " + controller.resendTime.toString()
+                        : "Resend code",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: const Color.fromARGB(255, 120, 119, 119),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
-              SizedBox(height: 24),
-              Text(
-                'Resend code in 20',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: const Color.fromARGB(255, 120, 119, 119),
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
@@ -93,6 +124,7 @@ class _EnterCodePageState extends State<EnterCodePage> {
     TextEditingController textEditingController, {
     FocusNode? nextFocusNode,
     FocusNode? prevFocusNode,
+    void Function()? onChange,
   }) {
     return Container(
       width: 80,
@@ -106,9 +138,8 @@ class _EnterCodePageState extends State<EnterCodePage> {
       child: KeyboardListener(
         focusNode: FocusNode(),
         onKeyEvent: (value) {
-          print(value);
-          if(textEditingController.text.isEmpty && value.logicalKey.keyLabel=="Backspace"){
-              prevFocusNode?.requestFocus();
+          if (textEditingController.text.isEmpty && value.logicalKey.keyLabel == "Backspace") {
+            prevFocusNode?.requestFocus();
           }
         },
         child: TextField(
@@ -131,9 +162,26 @@ class _EnterCodePageState extends State<EnterCodePage> {
             } else if (value.isEmpty && prevFocusNode != null) {
               prevFocusNode.requestFocus();
             }
+
+            if (onChange != null) {
+              onChange();
+            }
           },
         ),
       ),
     );
+  }
+
+  void sendOtp() {
+    final code1 = textEditingController1.text;
+    final code2 = textEditingController2.text;
+    final code3 = textEditingController3.text;
+    final code4 = textEditingController4.text;
+
+    final code = code1 + code2 + code3 + code4;
+
+    if (code.length == 4) {
+      Get.find<LogInController>().sendOtp(code);
+    }
   }
 }
