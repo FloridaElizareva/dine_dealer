@@ -172,7 +172,7 @@ class _EnterCodePageState extends State<EnterCodePage> {
     );
   }
 
-  void sendOtp() {
+  void sendOtp() async{
     final code1 = textEditingController1.text;
     final code2 = textEditingController2.text;
     final code3 = textEditingController3.text;
@@ -181,7 +181,7 @@ class _EnterCodePageState extends State<EnterCodePage> {
     final code = code1 + code2 + code3 + code4;
 
     if (code.length == 4) {
-      Get.find<LogInController>().sendOtp(code);
+      await Get.find<LogInController>().sendOtp(code);
     }
   }
 }

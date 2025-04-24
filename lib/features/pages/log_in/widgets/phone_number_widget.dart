@@ -1,4 +1,5 @@
 import 'package:dine_dealer/core/constants/country_codes.dart';
+import 'package:dine_dealer/core/theme/colors.dart';
 import 'package:dine_dealer/features/domain/controllers/log_in_controller.dart';
 import 'package:dine_dealer/features/pages/enter_code_page/enter_code_page.dart';
 import 'package:flutter/material.dart';
@@ -13,15 +14,6 @@ class PhoneNumberWidget extends StatefulWidget {
 }
 
 class _PhoneNumberWidgetState extends State<PhoneNumberWidget> {
-  late TextEditingController textController;
-
-  @override
-  void initState() {
-    final controller = Get.put(LogInController());
-    textController = TextEditingController(text: controller.selectedCountry.code);
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<LogInController>(
@@ -30,17 +22,32 @@ class _PhoneNumberWidgetState extends State<PhoneNumberWidget> {
           children: [
             Row(
               children: [
-                DropdownButton(
-                  menuWidth: 200,
-                  value: controller.selectedCountry,
-                  items: countriesToItems(controller.countryCodes.countries),
-                  onChanged: (e) {
-                    controller.selectCountry(e!);
-                    textController.value = TextEditingValue(text: e.code);
-                  },
-                  selectedItemBuilder: (_) {
-                    return controller.countryCodes.countries.map((e) => e.flag).toList();
-                  },
+                Container(
+                  height: 56,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFF1ECE1),
+                    borderRadius: BorderRadius.circular(28),
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<Country>(
+                      menuWidth: 200,
+                      value: controller.selectedCountry,
+                      items: countriesToItems(controller.countryCodes.countries),
+                      onChanged: (e) {
+                        controller.selectCountry(e!);
+                      },
+                      selectedItemBuilder: (_) {
+                        return controller.countryCodes.countries.map((e) => e.flag).toList();
+                      },
+                      icon: Icon(Icons.arrow_drop_down),
+                      dropdownColor: const Color(0xFFF1ECE1),
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
                 ),
                 const SizedBox(width: 12),
                 Container(
@@ -96,10 +103,14 @@ class _PhoneNumberWidgetState extends State<PhoneNumberWidget> {
                 ),
               ],
             ),
-            Text(
-              controller.logInFailure != null ? controller.logInFailure!.message : "",
-              style: TextStyle(
-                color: Colors.red,
+            AnimatedOpacity(
+              opacity: controller.logInFailure != null ? 1.0 : 0.0,
+              duration: Duration(milliseconds: 300),
+              child: Text(
+                controller.logInFailure != null ? controller.logInFailure!.message : "",
+                style: TextStyle(
+                  color: Colors.red,
+                ),
               ),
             ),
             const SizedBox(height: 24),
@@ -128,13 +139,24 @@ class _PhoneNumberWidgetState extends State<PhoneNumberWidget> {
     await controller.logIn();
 
     if (controller.logInFailure == null) {
-      Get.to(EnterCodePage());
+      Get.to(
+        EnterCodePage(),
+        transition: Transition.fadeIn,
+        duration: Duration(milliseconds: 300),
+      );
     }
   }
 
   Widget _buildLoginChild(bool isLoading) {
     if (isLoading) {
-      return CircularProgressIndicator();
+      return SizedBox(
+        width: 20,
+        height: 20,
+        child: CircularProgressIndicator(
+          color: DDColors.bg,
+          strokeWidth: 2.5,
+        ),
+      );
     }
 
     return Text(

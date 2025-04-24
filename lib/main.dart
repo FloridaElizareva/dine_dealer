@@ -1,3 +1,4 @@
+import 'package:dine_dealer/core/di/inject.dart';
 import 'package:dine_dealer/core/failures/failure.dart';
 import 'package:dine_dealer/features/data/repositories/log_in_repository.dart';
 import 'package:dine_dealer/features/pages/log_in/log_in_page.dart';
@@ -8,7 +9,7 @@ import 'features/pages/enter_code_page/enter_code_page.dart';
 
 
 void main() {
-  // LogInRepository().logIn('+995558544672');
+  inject();
   runApp(const MyApp());
 }
 
