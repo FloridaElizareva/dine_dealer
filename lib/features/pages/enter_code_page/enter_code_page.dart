@@ -1,5 +1,6 @@
 import 'package:dine_dealer/core/theme/colors.dart';
 import 'package:dine_dealer/features/domain/controllers/log_in_controller.dart';
+import 'package:dine_dealer/features/pages/onboarding/onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -89,7 +90,7 @@ class _EnterCodePageState extends State<EnterCodePage> {
                         focusNode4,
                         textEditingController4,
                         prevFocusNode: focusNode3,
-                        onChange: () => sendOtp(),
+                        onChange: () => sendOtp(controller),
                       ),
                     ],
                   ),
@@ -172,7 +173,7 @@ class _EnterCodePageState extends State<EnterCodePage> {
     );
   }
 
-  void sendOtp() async{
+  void sendOtp(LogInController controller) async {
     final code1 = textEditingController1.text;
     final code2 = textEditingController2.text;
     final code3 = textEditingController3.text;
@@ -181,7 +182,11 @@ class _EnterCodePageState extends State<EnterCodePage> {
     final code = code1 + code2 + code3 + code4;
 
     if (code.length == 4) {
-      await Get.find<LogInController>().sendOtp(code);
+      await controller.sendOtp(code);
+
+      if (controller.enterCodeFailure == null) {
+        Get.off(Onboarding());
+      }
     }
   }
 }
