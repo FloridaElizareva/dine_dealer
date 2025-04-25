@@ -1,6 +1,9 @@
 import 'package:dine_dealer/core/assets/fonts.gen.dart';
+import 'package:dine_dealer/features/pages/onboarding2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:dine_dealer/core/theme/colors.dart';
 
 class Onboarding extends StatefulWidget {
   const Onboarding({super.key});
@@ -11,6 +14,28 @@ class Onboarding extends StatefulWidget {
 
 class _OnboardingState extends State<Onboarding> {
   int stepIndex = 0;
+
+  void onButtonPressed() {
+    if (stepIndex < 2) {
+      stepIndex = stepIndex + 1;
+      setState(() {});
+    } else {
+      Get.off(Onboarding2());
+    }
+  }
+
+  double getWidth(int stepIndex) {
+    switch (stepIndex) {
+      case 0:
+        return 50;
+      case 1:
+        return 100;
+      case 2:
+        return 200;
+      default:
+        return 50;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +86,7 @@ class _OnboardingState extends State<Onboarding> {
               ),
               const SizedBox(height: 63),
               Text(
-                subtitles[stepIndex],
+                titles[stepIndex],
                 style: const TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.w700,
@@ -70,7 +95,7 @@ class _OnboardingState extends State<Onboarding> {
               ),
               const SizedBox(height: 6),
               Text(
-                titles[stepIndex],
+                subtitles[stepIndex],
                 style: const TextStyle(
                   fontSize: 18,
                   color: Colors.black87,
@@ -80,15 +105,16 @@ class _OnboardingState extends State<Onboarding> {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 18),
-              Center(
+              SizedBox(
+                width: 200,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      width: stepIndex == 0? 50: 100,
+                      width: getWidth(stepIndex),
                       height: 5,
                       decoration: BoxDecoration(
-                        color: Colors.orange,
+                        color: DDColors.main,
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(28),
                           bottomLeft: Radius.circular(28),
@@ -97,7 +123,6 @@ class _OnboardingState extends State<Onboarding> {
                     ),
                     Expanded(
                       child: Container(
-                        width: 100,
                         height: 5,
                         decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 222, 215, 215),
@@ -116,15 +141,7 @@ class _OnboardingState extends State<Onboarding> {
                 width: 85,
                 height: 43,
                 child: ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      stepIndex = (stepIndex + 1) % 3;
-                    });
-                  },
-                  child: Text(
-                    'Next →',
-                    style: TextStyle(fontSize: 15),
-                  ),
+                  onPressed: onButtonPressed,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
                     foregroundColor: Colors.white,
@@ -132,6 +149,10 @@ class _OnboardingState extends State<Onboarding> {
                       horizontal: 12.0,
                       vertical: 6.0,
                     ),
+                  ),
+                  child: Text(
+                    'Next →',
+                    style: TextStyle(fontSize: 15),
                   ),
                 ),
               ),
