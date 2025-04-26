@@ -27,7 +27,7 @@ class _OnboardingState extends State<Onboarding> {
   double getWidth(int stepIndex) {
     switch (stepIndex) {
       case 0:
-        return 50;
+        return 67;
       case 1:
         return 100;
       case 2:

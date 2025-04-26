@@ -15,6 +15,7 @@ dependencies:
   dio: ^5.8.0+1
   either_dart: ^1.0.0
   flutter_secure_storage: ^4.2.1
+  intl_utils: ^2.8.10
 
 dev_dependencies:
   flutter_test:
@@ -83,5 +84,12 @@ flutter_gen:
   integrations:
     flutter_svg: true
 
+
+flutter_intl:
+  enabled: true
+  main_locale: en
+  class_name: L10n
+  arb_dir: lib/core/l10n/arb
+  output_dir: lib/core/l10n/generated
 
 

@@ -1,5 +1,6 @@
 import 'package:dine_dealer/core/assets/assets.gen.dart';
 import 'package:dine_dealer/core/assets/fonts.gen.dart';
+import 'package:dine_dealer/core/l10n/generated/l10n.dart';
 import 'package:dine_dealer/core/theme/colors.dart';
 import 'package:dine_dealer/features/pages/log_in/widgets/phone_number_widget.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class LogInPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'DineDealer',
+                    L10n.current.dineDealer,
                     style: TextStyle(
                       fontSize: 26,
                       color: DDColors.main,
