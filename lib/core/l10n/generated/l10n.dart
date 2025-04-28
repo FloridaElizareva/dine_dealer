@@ -59,6 +59,176 @@ class L10n {
   String get dineDealer {
     return Intl.message('DineDealer', name: 'dineDealer', desc: '', args: []);
   }
+
+  /// `Your table,\nyour time,\nour call`
+  String get titleLogIn {
+    return Intl.message(
+      'Your table,\nyour time,\nour call',
+      name: 'titleLogIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log In or Create an Account to Begin`
+  String get logInText3 {
+    return Intl.message(
+      'Log In or Create an Account to Begin',
+      name: 'logInText3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `By continuing, you agree to the `
+  String get logInText4 {
+    return Intl.message(
+      'By continuing, you agree to the ',
+      name: 'logInText4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Terms & Conditions`
+  String get logInText5 {
+    return Intl.message(
+      'Terms & Conditions',
+      name: 'logInText5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` and\nacknowledge the `
+  String get logInText6 {
+    return Intl.message(
+      ' and\nacknowledge the ',
+      name: 'logInText6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Privacy Policy.`
+  String get logInText7 {
+    return Intl.message(
+      'Privacy Policy.',
+      name: 'logInText7',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter the code`
+  String get enterCodeText1 {
+    return Intl.message(
+      'Enter the code',
+      name: 'enterCodeText1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter the 4-digit code sent to you at`
+  String get enterCodeText2 {
+    return Intl.message(
+      'Enter the 4-digit code sent to you at',
+      name: 'enterCodeText2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resend code in `
+  String get enterCodeText3 {
+    return Intl.message(
+      'Resend code in ',
+      name: 'enterCodeText3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resend code`
+  String get enterCodeText4 {
+    return Intl.message(
+      'Resend code',
+      name: 'enterCodeText4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get a plan`
+  String get onboardingTitle1 {
+    return Intl.message(
+      'Get a plan',
+      name: 'onboardingTitle1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Make reservations`
+  String get onboardingTitle2 {
+    return Intl.message(
+      'Make reservations',
+      name: 'onboardingTitle2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enjoy your meal!`
+  String get onboardingTitle3 {
+    return Intl.message(
+      'Enjoy your meal!',
+      name: 'onboardingTitle3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose the number of calls you need`
+  String get onboardingSubtitle1 {
+    return Intl.message(
+      'Choose the number of calls you need',
+      name: 'onboardingSubtitle1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use calls to book tables easily`
+  String get onboardingSubtitle2 {
+    return Intl.message(
+      'Use calls to book tables easily',
+      name: 'onboardingSubtitle2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Stress-free dining, every time!`
+  String get onboardingSubtitle3 {
+    return Intl.message(
+      'Stress-free dining, every time!',
+      name: 'onboardingSubtitle3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Next →`
+  String get onboardingTextButton {
+    return Intl.message(
+      'Next →',
+      name: 'onboardingTextButton',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<L10n> {

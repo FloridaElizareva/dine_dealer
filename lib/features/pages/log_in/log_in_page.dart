@@ -44,7 +44,7 @@ class LogInPage extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: Text(
-                  'Your table,\nyour time,\nour call.',
+                  L10n.current.titleLogIn,
                   style: TextStyle(
                     fontSize: 52,
                     height: 1.2,
@@ -57,9 +57,9 @@ class LogInPage extends StatelessWidget {
               const Spacer(),
               Align(
                 alignment: Alignment.centerLeft,
-                child: const Text(
-                  'Log In or Create an Account to Begin',
-                  style: TextStyle(
+                child: Text(
+                  L10n.current.logInText3,
+                  style: const TextStyle(
                     fontSize: 16,
                     color: Colors.black87,
                   ),
@@ -74,16 +74,16 @@ class LogInPage extends StatelessWidget {
                   text: TextSpan(
                     style: TextStyle(color: Colors.black87),
                     children: [
-                      const TextSpan(text: 'By continuing, you agree to the '),
+                      TextSpan(text: L10n.current.logInText4,),
                       TextSpan(
-                        text: 'Terms & Conditions',
+                        text: L10n.current.logInText5,
                         style: TextStyle(
                           decoration: TextDecoration.underline,
                         ),
                       ),
-                      const TextSpan(text: ' and\nacknowledge the '),
+                      TextSpan(text: L10n.current.logInText6),
                       TextSpan(
-                        text: 'Privacy Policy.',
+                        text: L10n.current.logInText7,
                         style: TextStyle(
                           decoration: TextDecoration.underline,
                         ),

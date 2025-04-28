@@ -23,5 +23,42 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "dineDealer": MessageLookupByLibrary.simpleMessage("DineDealer"),
+    "enterCodeText1": MessageLookupByLibrary.simpleMessage("Enter the code"),
+    "enterCodeText2": MessageLookupByLibrary.simpleMessage(
+      "Enter the 4-digit code sent to you at",
+    ),
+    "enterCodeText3": MessageLookupByLibrary.simpleMessage("Resend code in "),
+    "enterCodeText4": MessageLookupByLibrary.simpleMessage("Resend code"),
+    "logInText3": MessageLookupByLibrary.simpleMessage(
+      "Log In or Create an Account to Begin",
+    ),
+    "logInText4": MessageLookupByLibrary.simpleMessage(
+      "By continuing, you agree to the ",
+    ),
+    "logInText5": MessageLookupByLibrary.simpleMessage("Terms & Conditions"),
+    "logInText6": MessageLookupByLibrary.simpleMessage(
+      " and\nacknowledge the ",
+    ),
+    "logInText7": MessageLookupByLibrary.simpleMessage("Privacy Policy."),
+    "onboardingSubtitle1": MessageLookupByLibrary.simpleMessage(
+      "Choose the number of calls you need",
+    ),
+    "onboardingSubtitle2": MessageLookupByLibrary.simpleMessage(
+      "Use calls to book tables easily",
+    ),
+    "onboardingSubtitle3": MessageLookupByLibrary.simpleMessage(
+      "Stress-free dining, every time!",
+    ),
+    "onboardingTextButton": MessageLookupByLibrary.simpleMessage("Next →"),
+    "onboardingTitle1": MessageLookupByLibrary.simpleMessage("Get a plan"),
+    "onboardingTitle2": MessageLookupByLibrary.simpleMessage(
+      "Make reservations",
+    ),
+    "onboardingTitle3": MessageLookupByLibrary.simpleMessage(
+      "Enjoy your meal!",
+    ),
+    "titleLogIn": MessageLookupByLibrary.simpleMessage(
+      "Your table,\nyour time,\nour call",
+    ),
   };
 }

@@ -1,6 +1,25 @@
 {
     "@@locale": "en",
-    "dineDealer": "DineDealer"
-    
+    "dineDealer": "DineDealer",
+    "titleLogIn": "Your table,\nyour time,\nour call",
+    "logInText3": "Log In or Create an Account to Begin",
+    "logInText4": "By continuing, you agree to the ",
+    "logInText5": "Terms & Conditions",
+    "logInText6": " and\nacknowledge the ",
+    "logInText7": "Privacy Policy.",
+
+    "enterCodeText1": "Enter the code",
+    "enterCodeText2": "Enter the 4-digit code sent to you at",
+    "enterCodeText3": "Resend code in ",
+    "enterCodeText4": "Resend code",
+
+    "onboardingTitle1": "Get a plan",
+    "onboardingTitle2": "Make reservations",
+    "onboardingTitle3": "Enjoy your meal!",
+    "onboardingSubtitle1": "Choose the number of calls you need",
+    "onboardingSubtitle2": "Use calls to book tables easily",
+    "onboardingSubtitle3": "Stress-free dining, every time!",
+    "onboardingTextButton": "Next →"
+        
   }
   

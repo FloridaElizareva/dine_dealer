@@ -1,6 +1,7 @@
+import 'package:dine_dealer/core/l10n/generated/l10n.dart';
 import 'package:dine_dealer/core/theme/colors.dart';
 import 'package:dine_dealer/features/domain/controllers/log_in_controller.dart';
-import 'package:dine_dealer/features/pages/onboarding/onboarding.dart';
+import 'package:dine_dealer/features/pages/onboarding/onboarding_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -62,7 +63,9 @@ class _EnterCodePageState extends State<EnterCodePage> {
                   ),
                   SizedBox(height: 8),
                   Text(
-                    'Enter the 4-digit code sent to you at ${controller.selectedCountry.code}${controller.phone}',
+                    L10n.current.enterCodeText1 +
+                        controller.selectedCountry.code +
+                        controller.phone,
                     style: TextStyle(fontSize: 16),
                   ),
                   SizedBox(height: 32),
@@ -103,8 +106,8 @@ class _EnterCodePageState extends State<EnterCodePage> {
                   SizedBox(height: 24),
                   Text(
                     controller.resendTime > 0
-                        ? "Resend code in " + controller.resendTime.toString()
-                        : "Resend code",
+                        ? L10n.current.enterCodeText3 + controller.resendTime.toString()
+                        : L10n.current.enterCodeText4,
                     style: TextStyle(
                       fontSize: 16,
                       color: const Color.fromARGB(255, 120, 119, 119),

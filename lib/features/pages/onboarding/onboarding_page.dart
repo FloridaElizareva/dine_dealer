@@ -1,5 +1,6 @@
 import 'package:dine_dealer/core/assets/fonts.gen.dart';
-import 'package:dine_dealer/features/pages/onboarding2.dart';
+import 'package:dine_dealer/core/l10n/generated/l10n.dart';
+import 'package:dine_dealer/features/pages/onboarding/onboarding2_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -46,15 +47,15 @@ class _OnboardingState extends State<Onboarding> {
     ];
 
     final List<String> titles = [
-      'Get a plan',
-      'Make reservations',
-      'Enjoy your meal!',
+      L10n.current.onboardingTitle1,
+      L10n.current.onboardingTitle2,
+      L10n.current.onboardingTitle3,
     ];
 
     final List<String> subtitles = [
-      'Choose the number of calls you need',
-      'Use calls to book tables easily',
-      'Stress-free dining, every time!',
+      L10n.current.onboardingSubtitle1,
+      L10n.current.onboardingSubtitle2,
+      L10n.current.onboardingSubtitle3,
     ];
 
     return Scaffold(
@@ -69,12 +70,12 @@ class _OnboardingState extends State<Onboarding> {
             children: [
               const SizedBox(height: 20),
               Center(
-                child: const Text(
-                  'DineDealer',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                child: Text(
+                  L10n.current.dineDealer,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w700,
                     fontSize: 20,
-                    fontFamily: 'Georgia',
+                    fontFamily: FontFamily.robotoSerif,
                   ),
                 ),
               ),
@@ -151,7 +152,7 @@ class _OnboardingState extends State<Onboarding> {
                     ),
                   ),
                   child: Text(
-                    'Next →',
+                    L10n.current.onboardingTextButton,
                     style: TextStyle(fontSize: 15),
                   ),
                 ),

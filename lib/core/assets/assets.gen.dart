@@ -21,6 +21,8 @@ class $AssetsImagesGen {
   /// File path: assets/images/onboarding1.png
   AssetGenImage get onboarding1 => const AssetGenImage('assets/images/onboarding1.png');
 
+  AssetGenImage get pasta => const AssetGenImage('assets/images/pasta.jpg');
+
   /// List of all assets
   List<dynamic> get values => [logoButton, onboarding1];
 }
