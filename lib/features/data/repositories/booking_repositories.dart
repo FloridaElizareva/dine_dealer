@@ -1,18 +1,16 @@
 import 'dart:convert';
-
 import 'package:dine_dealer/core/constants/urls.dart';
 import 'package:dine_dealer/core/failures/failure.dart';
-import 'package:dine_dealer/features/domain/models/auth_model.dart';
+import 'package:dine_dealer/features/domain/models/booking_model.dart';
 import 'package:dine_dealer/features/domain/models/favourite_model.dart';
 import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
 
-class FavouritesRepositories {
-  Future<Either<Failure, List<FavouriteModel>>> getFavourites(String token) async {
-    //return Right([]);
+class BookingRepositories {
+  Future<Either<Failure, List<BookingModel>>> getBookingUpcoming(String token) async {
     try {
       final response = await Dio().get(
-        Urls.favourites,
+        Urls.booking,
         options: Options(
           headers: {
             'Authorization': 'Bearer $token',
@@ -22,18 +20,19 @@ class FavouritesRepositories {
 
       print(response);
 
-      final data = response.data['favorites'] as List;
+      final data = response.data['booking'] as List;
 
-      final favourites = data.map((item) {
-        return FavouriteModel(
-          name: item['name'],
-          address: item['address'],
-          rating: item['rating'],
-          reviews: item['reviews'],
+      final booking = data.map((item) {
+        return BookingModel(
+          selectedRestaurantName: item['selected_restaurant_name'],
+          bookedDateTime: item['booked_date_time'],
+          address: item['selected_restaurant_address'],
+          guestsCount: item['guests_count']
+          //phone: item['selected_restaurant_phone'],
         );
       }).toList();
 
-      return Right(favourites);
+      return Right(booking);
     } on DioException catch (e) {
       return Left(
         Failure(
@@ -41,7 +40,6 @@ class FavouritesRepositories {
           e.response!.data['error'],
         ),
       );
-      
     }
   }
 }

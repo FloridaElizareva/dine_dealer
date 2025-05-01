@@ -1,24 +1,25 @@
 import 'package:dine_dealer/core/assets/fonts.gen.dart';
 import 'package:dine_dealer/core/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 class FavouriteCard extends StatelessWidget {
   //final String imageUrl;
   final image;
   final String title;
-  final double rating;
+  final double? rating;
   final String address;
-  final int reviews;
+  final int? reviews;
 
   const FavouriteCard({
     Key? key,
     //required this.imageUrl,
     required this.image,
     required this.title,
-    required this.rating,
+    this.rating,
     required this.address,
-    required this.reviews,
+    this.reviews,
   }) : super(key: key);
 
   @override
@@ -26,13 +27,11 @@ class FavouriteCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4),
       child: Container(
-        height: 315,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-
               color: Colors.black.withOpacity(0.05),
               blurRadius: 8,
               offset: const Offset(0, 4),
@@ -71,10 +70,10 @@ class FavouriteCard extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const Icon(
-                        LucideIcons.heart,
-                        size: 24,
-                        color: Colors.orange,
+                      SvgPicture.asset(
+                        'assets/images/like.svg',
+                        width: 20,
+                        height: 20,
                       ),
                     ],
                   ),
@@ -84,7 +83,7 @@ class FavouriteCard extends StatelessWidget {
                       const Icon(Icons.star, size: 18, color: Colors.amber),
                       const SizedBox(width: 4),
                       Text(
-                        rating.toString(),
+                        rating != null ? rating.toString() : '–',
                         style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
@@ -92,13 +91,16 @@ class FavouriteCard extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 8),
-                      Text(
-                        address,
-                        style: const TextStyle(fontSize: 14, color: Colors.grey),
+                      Flexible(
+                        child: Text(
+                          address,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(fontSize: 14, color: Colors.grey),
+                        ),
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        '$reviews reviews',
+                        '${reviews ?? 0} reviews',
                         style: const TextStyle(
                           fontSize: 14,
                           color: Colors.blue,
@@ -136,7 +138,7 @@ class FavouriteCard extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(35),
                               ),
-                              padding: const EdgeInsets.symmetric(vertical: 14),
+                              //padding: const EdgeInsets.symmetric(vertical: 14),
                             ),
                             child: Text(
                               'Book Now',
@@ -152,6 +154,9 @@ class FavouriteCard extends StatelessWidget {
                       ),
                     ],
                   ),
+                  SizedBox(
+                    height: 15,
+                  )
                 ],
               ),
             ),

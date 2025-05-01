@@ -7,4 +7,5 @@ abstract class DDColors {
   static final ddBlack = Color(0xFF1F1D17);
   static final lightGrey = Color(0xFFECE9DB);
   static final grey_yellow = Color(0xFF87836F);
+  static final green_activated = Color(0xFF2FD709);
 }

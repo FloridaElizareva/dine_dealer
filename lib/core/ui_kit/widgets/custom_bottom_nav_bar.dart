@@ -1,13 +1,23 @@
+import 'package:dine_dealer/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
-  const CustomBottomNavBar({Key? key}) : super(key: key);
+  final int currentIndex;
+  final ValueChanged<int> onTap;
+
+  CustomBottomNavBar({
+    Key? key,
+    required this.currentIndex,
+    required this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      backgroundColor: const Color(0xFFF9F6EE),
+      currentIndex: currentIndex,
+      onTap: onTap,
+      backgroundColor: DDColors.bg,
       selectedItemColor: Colors.black,
       unselectedItemColor: Colors.grey,
       showUnselectedLabels: true,

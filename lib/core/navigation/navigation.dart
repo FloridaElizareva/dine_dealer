@@ -1,5 +1,7 @@
 import 'package:dine_dealer/features/pages/enter_code_page/enter_code_page.dart';
 import 'package:dine_dealer/features/pages/favourites/favourites_page.dart';
+import 'package:dine_dealer/features/pages/favourites/widgets/loading.dart';
+import 'package:dine_dealer/features/pages/favourites/widgets/no_favourites.dart';
 import 'package:dine_dealer/features/pages/home/home_page.dart';
 import 'package:dine_dealer/features/pages/log_in/log_in_page.dart';
 import 'package:dine_dealer/features/pages/onboarding/onboarding_page.dart';
@@ -34,6 +36,14 @@ class Navigation {
       name: Routes.home,
       page: () => const HomePage(),
     ),
+    GetPage(
+      name: Routes.loading,
+      page: () => const Loading(),
+    ),
+    GetPage(
+      name: Routes.noFavourites,
+      page: () => const NoFavourites(),
+    ),
   ];
 }
 
@@ -44,4 +54,6 @@ abstract class Routes {
   static const onboarding2 = '/onboarding2';
   static const favourites = '/favourites';
   static const home = '/home';
+  static const loading = '/loading';
+  static const noFavourites = '/noFavourites';
 }

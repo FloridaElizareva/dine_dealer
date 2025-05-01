@@ -6,6 +6,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
   await FlutterSecureStorage().write(
     key: 'token',
     value:
