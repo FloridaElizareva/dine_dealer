@@ -1,4 +1,5 @@
 import 'package:dine_dealer/core/assets/fonts.gen.dart';
+import 'package:dine_dealer/core/failures/failure.dart';
 import 'package:dine_dealer/core/theme/colors.dart';
 import 'package:dine_dealer/features/domain/controllers/favourites_controller.dart';
 import 'package:dine_dealer/features/pages/favourites/widgets/favourite_card.dart';
@@ -18,9 +19,16 @@ class _FavouritesPageState extends State<FavouritesPage> {
   @override
   void initState() {
     super.initState();
-    
-    WidgetsBinding.instance.addPostFrameCallback((_) async{
-      await Get.find<FavouritesController>().getFavourites();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      while (true) {
+        await Get.find<FavouritesController>().getFavourites();
+
+        if (Get.find<FavouritesController>().favouritesFailure == null) {
+          break;
+        } else {
+          await Future.delayed(Duration(seconds: 3));
+        }
+      }
     });
   }
 

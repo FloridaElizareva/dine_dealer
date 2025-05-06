@@ -20,7 +20,7 @@ class FavouritesRepositories {
         ),
       );
 
-      print(response);
+      //print(response);
 
       final data = response.data['favorites'] as List;
 
@@ -35,13 +35,21 @@ class FavouritesRepositories {
 
       return Right(favourites);
     } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionError) {
+        return Left(
+          Failure(
+            null,
+            'No Internet',
+          ),
+        );
+      }
+
       return Left(
         Failure(
           e.response!.statusCode,
           e.response!.data['error'],
         ),
       );
-      
     }
   }
 }

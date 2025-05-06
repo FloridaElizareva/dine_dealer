@@ -3,8 +3,8 @@ import 'package:dine_dealer/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
-class NoFavourites extends StatelessWidget {
-  const NoFavourites({super.key});
+class NoBooking extends StatelessWidget {
+  const NoBooking({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class NoFavourites extends StatelessWidget {
         const SizedBox(height: 24),
         Center(
           child: Text(
-            'Nothing here yet!',
+            'No upcoming bookings.',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 20,
@@ -34,7 +34,7 @@ class NoFavourites extends StatelessWidget {
         ),
         Center(
           child: Text(
-            'Save your favorites for quick access later.',
+            'Ready to reserve your next table?',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 20,

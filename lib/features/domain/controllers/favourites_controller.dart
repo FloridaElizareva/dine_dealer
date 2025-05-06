@@ -20,17 +20,18 @@ class FavouritesController extends GetxController {
   Future<void> getFavourites() async {
     isLoading = true;
     update();
+
     final token = await fss.read(key: 'token');
     final lor = await favouritesRepository.getFavourites(token.toString());
 
     if (lor.isRight) {
       favourites = lor.right;
+      isLoading = false;
     } else {
       favouritesFailure = lor.left;
     }
 
-     isLoading = false;
-
+    
     update();
   }
 }

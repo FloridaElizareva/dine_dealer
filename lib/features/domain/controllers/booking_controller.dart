@@ -13,18 +13,21 @@ class BookingController extends GetxController{
 
   final FlutterSecureStorage fss;
   final BookingRepositories bookingRepository;
-  Failure? favouritesFailure;
+  Failure? bookingFailure;
+  bool isLoading = false;
 
   List<BookingModel> booking = [];
  
   Future<void> getBooking() async {
+    isLoading = true;
     final token = await fss.read(key: 'token');
     final lor = await bookingRepository.getBookingUpcoming(token.toString());
-
+    //print(lor);
     if (lor.isRight) {
       booking = lor.right;
+      isLoading = false;
     } else {
-      favouritesFailure = lor.left;
+      bookingFailure = lor.left;
     }
 
     update();

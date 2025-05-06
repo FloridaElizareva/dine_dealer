@@ -18,9 +18,9 @@ class BookingRepositories {
         ),
       );
 
-      print(response);
+      //print(response);
 
-      final data = response.data['booking'] as List;
+      final data = response.data['bookings'] as List;
 
       final booking = data.map((item) {
         return BookingModel(
